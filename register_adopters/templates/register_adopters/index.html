@@ -1,0 +1,43 @@
+{% extends 'register_adopters/base.html' %}
+{% block content %}
+
+<h1>Welcome on our register site</h1>
+
+<form action="{% url 'thanks' %}" method="post">
+    {% csrf_token %}
+
+    <table>
+        <tr>
+            <td><label>Name: </label></td>
+            <td><input type="text" name="adopters_name"/></td>
+        </tr>
+        <tr>
+            <td><label>ID Number: </label></td>
+            <td><input type="number" name="adopters_id"/></td>
+        </tr>
+        <tr>
+            <td><label>Birthdate: </label></td>
+            <td><input type="datetime-local" name="birthdate"></td>
+        </tr>
+
+        {% if characteristics_list %}
+        <tr>
+            <td><label>Select which features apply to you: </label></td>
+        </tr>
+        <tr>
+            {% for characteristic in characteristics_list %}
+            <td></td>
+            <td><input type="checkbox" name="{{characteristic.pk}}" value="True">
+                <div class="tooltip">{{characteristic.characteristic_name}} <span class="tooltiptext">{{characteristic.characteristic_description}}</span>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </table>
+    <div>
+        <input type="submit" value="Register me"/>
+    </div>
+
+</form>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'list_dragons/base.html' %}
+{% block content %}
+
+<h1>List of available dragons to adopt</h1>
+
+{% if dragon_list %}
+
+<table>
+    {% for dragon in dragon_list %}
+    <tr>
+        <td class="dragonlist"><a href= "{% url 'detail' dragon.id %}">{{ dragon.name }}</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+<p>No dragons are available.</p>
+{% endif %}
+{% endblock %}
