@@ -1,9 +1,12 @@
 {% extends 'list_dragons/base.html' %}
 {% block content %}
+{% load static %}
 <h1>{{dragon.name}}</h1>
 <div>
     Type: {{dragon.dragon_type}}
     <br/>
     Age: {{age}}
+    <br/>
+    <img src="{% static 'images/dragon.png' %}">
 </div>
 {% endblock %}
