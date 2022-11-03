@@ -16,7 +16,8 @@ class Dragon(models.Model):
     dragon_type = models.ForeignKey(DragonType, on_delete=models.CASCADE)
 
     def get_age(self):
-        return date.today() - self.birthdate
+        diff = date.today() - self.birthdate
+        return int(diff.days / 365.25)
 
     def __str__(self):
         return self.name
