@@ -15,9 +15,17 @@ class Dragon(models.Model):
     birthdate = models.DateField('birthdate')
     dragon_type = models.ForeignKey(DragonType, on_delete=models.CASCADE)
 
-    def get_age(self):
-        diff = date.today() - self.birthdate
-        return int(diff.days / 365.25)
+    def get_age(self) -> int:
+        today = date.today()
+        year_diff = today.year - self.birthdate.year
+        birthdate_to_come = 1
+        if today.month > self.birthdate.month:
+            birthdate_to_come = 0
+        elif today.month == self.birthdate.month:
+            if today.day >= self.birthdate.day:
+                birthdate_to_come = 0
+
+        return year_diff - birthdate_to_come
 
     def __str__(self):
         return self.name
